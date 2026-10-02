@@ -7,6 +7,17 @@ from .crystal import (
     plot_computational_cost,
     plot_energy_convergence,
 )
+from .eos import (
+    bm3_energy,
+    bm3_pressure,
+    eos_teaching_table,
+    fit_bm3_with_quantas,
+    make_cubic_volume_series,
+    plot_energy_volume,
+    plot_pressure_volume,
+    read_quantas_ev_dataset,
+    write_file_list,
+)
 from .structure import (
     asymmetric_unit_table,
     read_cif,
@@ -36,4 +47,13 @@ __all__ = [
     "analyse_crystal_outputs",
     "plot_energy_convergence",
     "plot_computational_cost",
+    "make_cubic_volume_series",
+    "write_file_list",
+    "read_quantas_ev_dataset",
+    "fit_bm3_with_quantas",
+    "bm3_energy",
+    "bm3_pressure",
+    "eos_teaching_table",
+    "plot_energy_volume",
+    "plot_pressure_volume",
 ]
