@@ -1,0 +1,32 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+CONFIG="$ROOT/.course-upstream"
+
+source "$CONFIG"
+
+cd "$ROOT"
+
+if git remote get-url upstream >/dev/null 2>&1; then
+    git remote set-url upstream "$UPSTREAM_URL"
+else
+    git remote add upstream "$UPSTREAM_URL"
+fi
+
+if ! git diff --quiet -- course/; then
+    echo "ERROR: local changes were found inside course/."
+    echo "Move your work to work/ or commit/discard those changes first."
+    exit 1
+fi
+
+echo "Fetching course material..."
+git fetch --quiet upstream "${UPSTREAM_BRANCH:-main}"
+
+git restore \
+    --source "upstream/${UPSTREAM_BRANCH:-main}" \
+    --worktree \
+    -- course/
+
+echo "Course material updated."
+echo "Your work/ directory was not modified."

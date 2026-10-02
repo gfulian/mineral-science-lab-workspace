@@ -1,0 +1,8 @@
+numpy
+scipy
+matplotlib
+pandas
+gemmi
+spglib
+jupyter
+# Quantas will be added and pinned after the course version is validated.

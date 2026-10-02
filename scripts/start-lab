@@ -1,0 +1,36 @@
+#!/usr/bin/env bash
+set -euo pipefail
+
+ROOT="$(git rev-parse --show-toplevel)"
+
+if [ "$#" -ne 1 ]; then
+    echo "Usage: start-lab NN"
+    echo "Example: start-lab 01"
+    exit 1
+fi
+
+LAB="$(printf "%02d" "$((10#$1))")"
+SOURCE="$ROOT/course/labs/lab${LAB}"
+DEST="$ROOT/work/lab${LAB}"
+
+if [ ! -d "$SOURCE" ]; then
+    echo "ERROR: Laboratory ${LAB} is not available."
+    echo "Run 'update-course' and try again."
+    exit 1
+fi
+
+mkdir -p "$DEST"
+
+while IFS= read -r -d '' item; do
+    rel="${item#$SOURCE/}"
+    target="$DEST/$rel"
+    if [ -d "$item" ]; then
+        mkdir -p "$target"
+    elif [ ! -e "$target" ]; then
+        mkdir -p "$(dirname "$target")"
+        cp "$item" "$target"
+    fi
+done < <(find "$SOURCE" -mindepth 1 -print0)
+
+echo "Laboratory ${LAB} is ready in work/lab${LAB}/"
+echo "Existing student files were not overwritten."
