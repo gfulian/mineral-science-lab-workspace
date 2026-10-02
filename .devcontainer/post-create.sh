@@ -10,6 +10,8 @@ if [ -d "course/python" ]; then
     python -m pip install -e course/python
 fi
 
+chmod +x scripts/update-course scripts/start-lab
+
 sudo ln -sf "$PWD/scripts/update-course" /usr/local/bin/update-course
 sudo ln -sf "$PWD/scripts/start-lab" /usr/local/bin/start-lab
 
