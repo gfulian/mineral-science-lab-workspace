@@ -5,4 +5,12 @@ pandas
 gemmi
 spglib
 jupyter
-# Quantas will be added and pinned after the course version is validated.
+
+# Interactive crystal-structure viewer used in Laboratory 1
+py3Dmol==2.5.5
+
+# Quantas 2 beta.
+# For the first validation we follow the development branch that currently
+# contains the course target release (2.0.0b13). Before student release,
+# freeze this to the exact b13 commit SHA.
+quantas @ git+https://github.com/gfulian/quantas.git@dev/refactor
