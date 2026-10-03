@@ -1,11 +1,17 @@
-# Reference results
+# Laboratory 3 — validated reference calculations
 
-Before student release, place instructor-validated MgO Laboratory 3 outputs
-here:
+This directory contains the instructor-validated MgO calculations used as
+fallback data for Laboratory 3.
 
-- the full geometry optimization;
-- the six non-equilibrium constant-volume calculations.
+The reference set contains:
 
-These files are the fallback dataset if calculations cannot complete during a
-laboratory session because of queueing, cluster maintenance or another
-infrastructure problem.
+- the full static geometry optimization;
+- constant-volume EOS calculations at the distributed volume factors.
+
+Students should normally analyse their own calculations. These files are
+provided so that the laboratory can continue if calculations cannot complete
+during the session because of queueing, maintenance, or another cluster
+problem.
+
+The files in this directory correspond to the validated Laboratory 3 input
+settings and should be kept together as one internally consistent dataset.
