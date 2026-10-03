@@ -1,0 +1,50 @@
+T (K),Cp experimental (J mol⁻¹ K⁻¹),reported specific heat (J kg⁻¹ K⁻¹),source,source_url
+9.759,0.00436094,0.108200,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+20.263,0.03971193,0.985300,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+30.419,0.14356427,3.562000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+40.904,0.40086756,9.946000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+50.287,0.85243806,21.150000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+61.092,1.71898266,42.650000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+70.232,2.76367271,68.570000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+80.845,4.32063168,107.200000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+91.417,6.16657320,153.000000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+99.306,7.66186644,190.100000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+110.069,9.84636492,244.300000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+120.730,12.07116780,299.500000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+133.280,14.70707556,364.900000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+144.252,16.94396976,420.400000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+155.549,19.17280308,475.700000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+169.320,21.72407160,539.000000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+182.142,23.95290492,594.300000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+199.765,26.64120840,661.000000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+214.540,28.71285456,712.400000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+229.672,30.61925268,759.700000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+242.736,32.09842416,796.400000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+256.967,33.62596092,834.300000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+269.793,34.79478852,863.300000,"Barron, Berg & Morrison (1959), NIST SRD 30 Z00723",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00723
+298.15,37.26544824,924.600000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+300.00,37.40651364,928.100000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+320.00,38.75268060,961.500000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+340.00,39.88523424,989.600000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+360.00,40.93314864,1015.600000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+380.00,41.84402808,1038.200000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+400.00,42.63802476,1057.900000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+420.00,43.34738220,1075.500000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+440.00,43.98016128,1091.200000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+460.00,44.54442288,1105.200000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+480.00,45.05628876,1117.900000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+500.00,45.52785024,1129.600000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+550.00,46.53949068,1154.700000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+600.00,47.38588308,1175.700000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+650.00,48.09927096,1193.400000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+700.00,48.71995872,1208.800000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+750.00,49.26809856,1222.400000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+800.00,49.75578180,1234.500000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+850.00,50.19509976,1245.400000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+900.00,50.59008288,1255.200000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+950.00,50.94879204,1264.100000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+1000.00,51.27928812,1272.300000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+1050.00,51.57754068,1279.700000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+1100.00,51.84758016,1286.400000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+1150.00,52.10149788,1292.700000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
+1200.00,52.32720252,1298.300000,"NIST SRD 30 Z00290, evaluated drop calorimetry",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00290
