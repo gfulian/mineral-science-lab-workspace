@@ -2,20 +2,19 @@ MgO - 2x2x2 phonon-dispersion sampling
 CRYSTAL
 0 0 0
 225
-<A0>
+<!-- put the optimised a_0 value here --!>
 2
 12 0.0 0.0 0.0
 8  0.5 0.5 0.5
 SCELPHONO
-2 0 0
-0 2 0
-0 0 2
+ 2  0  0
+ 0  2  0
+ 0  0  2
 FREQCALC
 DISPERSI
 NOOPTGEOM
 NOINTENS
 ENDFREQ
-END
 BASISSET
 POB-TZVP-REV2
 DFT
@@ -24,7 +23,7 @@ END
 TOLINTEG
 8 8 8 8 16
 TOLDEE
-8
+10
 SHRINK
-<X> <X>
+<!-- wait the teacher's hints about this point --!>
 END
