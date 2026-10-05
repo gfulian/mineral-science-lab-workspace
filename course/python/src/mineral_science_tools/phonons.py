@@ -606,3 +606,91 @@ def convergence_table(
             )
 
     return pd.DataFrame(rows)
+
+def ha_entropy_curve(
+    path: str | Path,
+    *,
+    temperature_min: float = 0.0,
+    temperature_max: float = 1200.0,
+    temperature_step: float = 10.0,
+) -> pd.DataFrame:
+    """Convenience wrapper returning Quantas harmonic entropy in J mol-1 K-1."""
+    result = run_ha(
+        path,
+        temperature_min=temperature_min,
+        temperature_max=temperature_max,
+        temperature_step=temperature_step,
+    )
+    return ha_property_curve(result, kind="entropy", energy_unit="J/mol")
+
+
+def load_experimental_entropy(path: str | Path) -> pd.DataFrame:
+    """Load the course MgO experimental/reference entropy CSV."""
+    return pd.read_csv(path)
+
+
+def plot_entropy_comparison(
+    curves: Mapping[str, pd.DataFrame],
+    experimental: pd.DataFrame | None = None,
+):
+    """Plot calculated harmonic entropy curves and optional experimental S° data."""
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots()
+
+    for label, table in curves.items():
+        ax.plot(
+            table["T (K)"],
+            table["S (J mol⁻¹ K⁻¹)"],
+            label=label,
+        )
+
+    if experimental is not None:
+        ax.scatter(
+            experimental["T (K)"],
+            experimental["S experimental/reference (J mol⁻¹ K⁻¹)"],
+            marker="o",
+            label="experiment/reference S° (1 bar)",
+        )
+
+    ax.set_xlabel("Temperature (K)")
+    ax.set_ylabel("Entropy (J mol⁻¹ K⁻¹)")
+    ax.legend()
+    fig.tight_layout()
+    return fig, ax
+
+
+def entropy_convergence_table(
+    curves: Mapping[str, pd.DataFrame],
+    *,
+    temperatures: Sequence[float] = (300.0, 600.0, 1000.0),
+    reference_label: str | None = None,
+) -> pd.DataFrame:
+    """Sample harmonic entropy curves at selected temperatures."""
+    rows = []
+
+    if reference_label is None:
+        reference_label = list(curves)[-1]
+
+    ref = curves[reference_label]
+    ref_t = ref["T (K)"].to_numpy(dtype=np.float64)
+    ref_s = ref["S (J mol⁻¹ K⁻¹)"].to_numpy(dtype=np.float64)
+
+    for label, table in curves.items():
+        t = table["T (K)"].to_numpy(dtype=np.float64)
+        entropy = table["S (J mol⁻¹ K⁻¹)"].to_numpy(dtype=np.float64)
+
+        for target in temperatures:
+            value = float(np.interp(target, t, entropy))
+            reference = float(np.interp(target, ref_t, ref_s))
+            rows.append(
+                {
+                    "sampling": label,
+                    "T (K)": float(target),
+                    "S (J mol⁻¹ K⁻¹)": value,
+                    f"ΔS vs {reference_label} (J mol⁻¹ K⁻¹)": value - reference,
+                }
+            )
+
+    return pd.DataFrame(rows)
+
