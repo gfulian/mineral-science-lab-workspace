@@ -1,0 +1,7 @@
+reference-results/raw/mgo_v091_4x4x4.out
+reference-results/raw/mgo_v094_4x4x4.out
+reference-results/raw/mgo_v097_4x4x4.out
+reference-results/raw/mgo_v100_4x4x4.out
+reference-results/raw/mgo_v103_4x4x4.out
+reference-results/raw/mgo_v106_4x4x4.out
+reference-results/raw/mgo_v109_4x4x4.out

@@ -1,0 +1,2 @@
+T (K),P (GPa),V0 conventional (A^3),KS0 (GPa),alphaV (K^-1),Cp (J mol^-1 K^-1),source,doi
+300,0.0001,74.698,162.83,3.17e-05,37.4,"Tange et al. (2009), primary parameters used in unified MgO P-V-T EOS",10.1029/2008JB005813

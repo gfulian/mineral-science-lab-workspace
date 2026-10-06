@@ -1,0 +1,12 @@
+P (GPa),conventional cell volume from experimental BM3 fit (A^3),V/V0,V0 fit (A^3),KT0 fixed (GPa),Kprime fit,source,doi
+0.0,74.71000000,1.00000000,74.71,160.2,3.99,"Speziale et al. (2001), BM3 fit to room-temperature quasi-hydrostatic compression",10.1029/2000JB900318
+1.0,74.25076444,0.99385309,74.71,160.2,3.99,"Speziale et al. (2001), BM3 fit to room-temperature quasi-hydrostatic compression",10.1029/2000JB900318
+2.0,73.80521566,0.98788938,74.71,160.2,3.99,"Speziale et al. (2001), BM3 fit to room-temperature quasi-hydrostatic compression",10.1029/2000JB900318
+3.0,73.37257987,0.98209851,74.71,160.2,3.99,"Speziale et al. (2001), BM3 fit to room-temperature quasi-hydrostatic compression",10.1029/2000JB900318
+4.0,72.95214764,0.97647099,74.71,160.2,3.99,"Speziale et al. (2001), BM3 fit to room-temperature quasi-hydrostatic compression",10.1029/2000JB900318
+5.0,72.54326692,0.97099808,74.71,160.2,3.99,"Speziale et al. (2001), BM3 fit to room-temperature quasi-hydrostatic compression",10.1029/2000JB900318
+6.0,72.14533695,0.96567176,74.71,160.2,3.99,"Speziale et al. (2001), BM3 fit to room-temperature quasi-hydrostatic compression",10.1029/2000JB900318
+7.0,71.75780295,0.96048458,74.71,160.2,3.99,"Speziale et al. (2001), BM3 fit to room-temperature quasi-hydrostatic compression",10.1029/2000JB900318
+8.0,71.38015153,0.95542968,74.71,160.2,3.99,"Speziale et al. (2001), BM3 fit to room-temperature quasi-hydrostatic compression",10.1029/2000JB900318
+9.0,71.01190662,0.95050069,74.71,160.2,3.99,"Speziale et al. (2001), BM3 fit to room-temperature quasi-hydrostatic compression",10.1029/2000JB900318
+10.0,70.65262591,0.94569169,74.71,160.2,3.99,"Speziale et al. (2001), BM3 fit to room-temperature quasi-hydrostatic compression",10.1029/2000JB900318

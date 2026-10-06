@@ -1,0 +1,27 @@
+T (K),Cp experimental/reference (J mol^-1 K^-1),S experimental/reference (J mol^-1 K^-1),H-H298.15 experimental/reference (kJ mol^-1),source,doi_or_url
+298.15,37.02272641,26.85403097,-0.02023768,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+300.00,37.17810144,27.08352610,0.04839850,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+350.00,40.54237346,33.08568327,1.99740124,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+400.00,42.81242845,38.65657547,4.08464785,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+450.00,44.44475308,43.79822446,6.26812589,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+500.00,45.67981175,48.54764211,8.52255627,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+550.00,46.65406454,52.94877289,10.83178897,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+600.00,47.44963922,57.04339545,13.18500089,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+650.00,48.11837803,60.86851591,15.57464851,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+700.00,48.69432518,64.45604101,17.99529805,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+750.00,49.20059547,67.83321444,20.44292352,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+800.00,49.65333811,71.02325380,22.91446796,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+850.00,50.06411938,74.04598284,25.40755966,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+900.00,50.44140594,76.91839128,27.92032283,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+950.00,50.79151683,79.65510800,30.45124816,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+1000.00,51.11925100,82.26879267,32.99910217,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+1050.00,51.42831092,84.77045708,35.56286246,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+1100.00,51.72159456,87.16972814,38.14167065,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+1150.00,52.00140055,89.47506328,40.73479754,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+1200.00,52.26957481,91.69392746,43.34161703,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+1250.00,52.52761693,93.83293904,45.96158630,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+1300.00,52.77675854,95.89799077,48.59423050,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+1350.00,53.01802172,97.89435033,51.23913094,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+1400.00,53.25226306,99.82674458,53.89591571,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+1450.00,53.48020731,101.69943028,56.56425235,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
+1500.00,53.70247331,103.51625383,59.24384185,NIST Chemistry WebBook SRD 69; Chase (1998) Shomate correlation,https://webbook.nist.gov/cgi/cbook.cgi?ID=C1309484&Mask=B
