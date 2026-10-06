@@ -29,14 +29,31 @@ $\alpha_V=3\alpha_a$ and converts molar volume to conventional-cell volume
 Source:
 https://srdata.nist.gov/CeramicDataPortal/Scd/Z00631
 
-## `mgo_isaak1989_KS.csv`
+## `mgo_isaak1989_bulk_moduli.csv`
 
-Adiabatic bulk modulus of single-crystal MgO from Isaak, Anderson & Goto (1989),
-resonance measurements up to 1800 K, distributed through NIST SRD 30 citation
-Z00281.
+High-temperature MgO elasticity from Isaak, Anderson & Goto (1989), distributed
+through NIST Structural Ceramics Database SRD 30, citation Z00281.
+
+The source requires a careful thermodynamic distinction:
+
+- the rectangular-parallelepiped resonance experiment determines **adiabatic**
+  single-crystal elastic constants $C_{ij}^{S}$;
+- the NIST "Bulk Modulus" series (161.6 GPa at 300 K, 141.4 GPa at 1000 K,
+  etc.) is the **isothermal bulk modulus $K_T$** used in MgO thermoelastic
+  comparisons;
+- for cubic MgO, the corresponding adiabatic bulk modulus can be reconstructed
+  directly from the measured adiabatic stiffnesses,
+
+  $$
+  K_S = rac{C_{11}^{S}+2C_{12}^{S}}{3}.
+  $$
+
+The CSV therefore contains both $K_T$ and the $K_S$ reconstructed from the
+measured adiabatic $C_{ij}$. This allows Laboratory 5 to compare like with like.
 
 Source:
 https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+
 
 ## `mgo_speziale2001_300K_BM3.csv`
 

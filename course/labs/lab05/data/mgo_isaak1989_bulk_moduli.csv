@@ -1,0 +1,17 @@
+T (K),KT experimental (GPa),KT uncertainty (GPa),C11s experimental (GPa),C12s experimental (GPa),KS from adiabatic Cij (GPa),source,doi_or_url
+300,161.600000,0.6,298.960000,96.420000,163.933333,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+400,158.900000,,292.940000,97.020000,162.326667,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+500,156.100000,,286.920000,97.640000,160.733333,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+600,153.200000,,280.620000,98.000000,158.873333,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+700,150.500000,,274.470000,98.430000,157.110000,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+800,147.400000,0.8,268.220000,98.540000,155.100000,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+900,144.400000,,261.940000,98.620000,153.060000,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+1000,141.400000,,255.740000,98.740000,151.073333,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+1100,138.300000,,249.520000,98.600000,148.906667,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+1200,135.100000,,243.320000,98.380000,146.693333,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+1300,132.100000,1.1,237.150000,98.050000,144.416667,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+1400,128.900000,,230.960000,97.560000,142.026667,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+1500,125.700000,,224.880000,97.080000,139.680000,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+1600,122.500000,,219.040000,96.440000,137.306667,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+1700,119.600000,,213.430000,95.690000,134.936667,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281
+1800,116.600000,1.4,208.180000,95.020000,132.740000,"Isaak, Anderson & Goto (1989), NIST SCD Z00281",https://srdata.nist.gov/CeramicDataPortal/Scd/Z00281

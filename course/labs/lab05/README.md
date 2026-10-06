@@ -17,7 +17,9 @@ Reference calculations span:
 V/Vref = 0.91, 0.94, 0.97, 1.00, 1.03, 1.06, 1.09
 ```
 
-Every phonon calculation uses a 4x4x4 SCELPHONO supercell.
+The first notebook asks you to inspect the supplied CRYSTAL input/output files
+and determine how the phonon calculations were performed before any automated
+summary is shown.
 
 The notebooks generate lightweight Quantas YAML/HDF5 results locally in the
 Codespace. The expensive CRYSTAL calculations have already been completed.
