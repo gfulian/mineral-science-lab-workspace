@@ -12,6 +12,7 @@ from __future__ import annotations
 
 from pathlib import Path
 from typing import Mapping, Sequence
+from functools import lru_cache
 import re
 
 import numpy as np
@@ -161,32 +162,70 @@ def nearest_index(values, target: float) -> int:
     return int(np.nanargmin(np.abs(values - float(target))))
 
 
+_QHA_GRID_ALIASES = {
+    "volume": ("equilibrium_volume",),
+    "alpha": ("thermal_expansion",),
+    "KT": ("isothermal_bulk_modulus",),
+    "KS": ("adiabatic_bulk_modulus",),
+    "Kprime": (
+        "bulk_modulus_pressure_derivative",
+        "isothermal_bulk_modulus_pressure_derivative",
+    ),
+    "Cv": ("isochoric_heat_capacity",),
+    "Cp": ("isobaric_heat_capacity",),
+    "entropy": ("entropy",),
+    "enthalpy": ("enthalpy",),
+}
+
+
+@lru_cache(maxsize=12)
+def _cached_qha_grid_arrays(
+    resolved_path: str,
+    mtime_ns: int,
+) -> dict[str, np.ndarray]:
+    """Read one Quantas result only once and cache its common grid arrays.
+
+    The file modification time is part of the cache key, so overwriting an HDF5
+    result automatically invalidates the cached entry on the next call.
+    """
+    _, payload = load_qha(resolved_path)
+
+    arrays: dict[str, np.ndarray] = {
+        "temperature": _field(payload, "temperature"),
+        "pressure": _field(payload, "pressure"),
+    }
+
+    for key, aliases in _QHA_GRID_ALIASES.items():
+        try:
+            arrays[key] = _field(payload, *aliases)
+        except AttributeError:
+            # Not every Quantas result necessarily exposes every property.
+            pass
+
+    return arrays
+
+
+def _qha_grid_arrays(path: str | Path) -> dict[str, np.ndarray]:
+    path = Path(path).resolve()
+    stat = path.stat()
+    return _cached_qha_grid_arrays(str(path), stat.st_mtime_ns)
+
+
 def qha_grid_field(
     path: str | Path,
     quantity: str,
 ) -> tuple[np.ndarray, np.ndarray, np.ndarray]:
-    """Return native QHA grid arrays for properties with documented native units."""
-    _, payload = load_qha(path)
-    temperature = _field(payload, "temperature")
-    pressure = _field(payload, "pressure")
-
-    aliases = {
-        "volume": ("equilibrium_volume",),
-        "alpha": ("thermal_expansion",),
-        "KT": ("isothermal_bulk_modulus",),
-        "KS": ("adiabatic_bulk_modulus",),
-        "Kprime": (
-            "bulk_modulus_pressure_derivative",
-            "isothermal_bulk_modulus_pressure_derivative",
-        ),
-        "Cv": ("isochoric_heat_capacity",),
-        "Cp": ("isobaric_heat_capacity",),
-        "entropy": ("entropy",),
-        "enthalpy": ("enthalpy",),
-    }
-    if quantity not in aliases:
+    """Return native QHA grid arrays without repeatedly reopening the HDF5 file."""
+    if quantity not in _QHA_GRID_ALIASES:
         raise KeyError(quantity)
-    return temperature, pressure, _field(payload, *aliases[quantity])
+
+    arrays = _qha_grid_arrays(path)
+    if quantity not in arrays:
+        raise AttributeError(
+            f"QHA result does not expose the requested property {quantity!r}."
+        )
+
+    return arrays["temperature"], arrays["pressure"], arrays[quantity]
 
 
 def qha_section(
@@ -459,24 +498,48 @@ def method_comparison(
     temperatures=(300.0, 1000.0, 1500.0),
     pressure=0.0,
 ) -> pd.DataFrame:
-    """Compare polynomial and BM3 results at selected states."""
+    """Compare polynomial and BM3 results without repeatedly reading HDF5 files.
+
+    Each Quantas result is loaded once.  The previous implementation reopened
+    each file for every temperature/property combination, which was needlessly
+    slow for fine QHA grids.
+    """
     rows = []
-    for temperature in temperatures:
-        for method, path in [("polynomial", poly_path), ("BM3 EOS", eos_path)]:
-            row = {"method": method, "T requested (K)": float(temperature)}
-            for key, out in [
-                ("volume", "V (A^3 primitive)"),
-                ("KT", "KT (GPa)"),
-                ("KS", "KS (GPa)"),
-                ("alpha", "alphaV (K^-1)"),
-            ]:
-                t, p, values = qha_grid_field(path, key)
-                i = nearest_index(t, temperature)
-                j = nearest_index(p, pressure)
-                row["T actual (K)"] = float(t[i])
-                row["P actual (GPa)"] = float(p[j])
-                row[out] = float(values[i, j])
+
+    datasets = [
+        ("polynomial", _qha_grid_arrays(poly_path)),
+        ("BM3 EOS", _qha_grid_arrays(eos_path)),
+    ]
+
+    for method, arrays in datasets:
+        t = arrays["temperature"]
+        p = arrays["pressure"]
+        j = nearest_index(p, pressure)
+
+        required = {
+            "volume": "V (A^3 primitive)",
+            "KT": "KT (GPa)",
+            "KS": "KS (GPa)",
+            "alpha": "alphaV (K^-1)",
+        }
+        missing = [key for key in required if key not in arrays]
+        if missing:
+            raise AttributeError(
+                f"{method} result is missing required properties: {missing}"
+            )
+
+        for temperature in temperatures:
+            i = nearest_index(t, temperature)
+            row = {
+                "method": method,
+                "T requested (K)": float(temperature),
+                "T actual (K)": float(t[i]),
+                "P actual (GPa)": float(p[j]),
+            }
+            for key, out in required.items():
+                row[out] = float(arrays[key][i, j])
             rows.append(row)
+
     return pd.DataFrame(rows)
 
 
