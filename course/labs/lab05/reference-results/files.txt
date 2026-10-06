@@ -1,7 +1,7 @@
-reference-results/raw/mgo_v091_phonons.out
-reference-results/raw/mgo_v094_phonons.out
-reference-results/raw/mgo_v097_phonons.out
-reference-results/raw/mgo_v100_phonons.out
-reference-results/raw/mgo_v103_phonons.out
-reference-results/raw/mgo_v106_phonons.out
-reference-results/raw/mgo_v109_phonons.out
+raw/mgo_v091_phonons.out
+raw/mgo_v094_phonons.out
+raw/mgo_v097_phonons.out
+raw/mgo_v100_phonons.out
+raw/mgo_v103_phonons.out
+raw/mgo_v106_phonons.out
+raw/mgo_v109_phonons.out
