@@ -9,6 +9,7 @@ The working sequence is:
 01-understand-qha-dataset.ipynb
 02-qha-minimization.ipynb
 03-qha-properties-experiment.ipynb
+04-pbe-vs-b3lyp.ipynb
 ```
 
 Reference calculations span:
@@ -23,3 +24,8 @@ summary is shown.
 
 The notebooks generate lightweight Quantas YAML/HDF5 results locally in the
 Codespace. The expensive CRYSTAL calculations have already been completed.
+
+
+The fourth notebook is a model-comparison extension. It uses the supplied
+B3LYP QHA reference dataset and compares its predictions with the main PBE
+calculation and the same experimental reference data.

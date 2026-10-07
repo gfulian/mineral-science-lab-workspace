@@ -45,7 +45,7 @@ The source requires a careful thermodynamic distinction:
   directly from the measured adiabatic stiffnesses,
 
   $$
-  K_S = rac{C_{11}^{S}+2C_{12}^{S}}{3}.
+  K_S = \frac{C_{11}^{S}+2C_{12}^{S}}{3}.
   $$
 
 The CSV therefore contains both $K_T$ and the $K_S$ reconstructed from the

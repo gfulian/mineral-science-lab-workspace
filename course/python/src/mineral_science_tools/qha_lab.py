@@ -183,11 +183,7 @@ def _cached_qha_grid_arrays(
     resolved_path: str,
     mtime_ns: int,
 ) -> dict[str, np.ndarray]:
-    """Read one Quantas result only once and cache its common grid arrays.
-
-    The file modification time is part of the cache key, so overwriting an HDF5
-    result automatically invalidates the cached entry on the next call.
-    """
+    """Load one Quantas result once and cache its common grid arrays."""
     _, payload = load_qha(resolved_path)
 
     arrays: dict[str, np.ndarray] = {
@@ -199,7 +195,6 @@ def _cached_qha_grid_arrays(
         try:
             arrays[key] = _field(payload, *aliases)
         except AttributeError:
-            # Not every Quantas result necessarily exposes every property.
             pass
 
     return arrays
@@ -470,12 +465,16 @@ def enthalpy_increment_curve(
         ["enthalpy"],
         energy_unit="kJ/mol",
     )
-    i = nearest_index(table["T (K)"], reference_temperature)
     table = table.rename(columns={"value": "H (kJ mol^-1)"})
-    table["H-Href (kJ mol^-1)"] = (
-        table["H (kJ mol^-1)"] - float(table.iloc[i]["H (kJ mol^-1)"])
+    href = float(
+        np.interp(
+            float(reference_temperature),
+            table["T (K)"].to_numpy(dtype=float),
+            table["H (kJ mol^-1)"].to_numpy(dtype=float),
+        )
     )
-    table.attrs["reference_temperature"] = float(table.iloc[i]["T (K)"])
+    table["H-Href (kJ mol^-1)"] = table["H (kJ mol^-1)"] - href
+    table.attrs["reference_temperature"] = float(reference_temperature)
     return table
 
 
@@ -498,12 +497,7 @@ def method_comparison(
     temperatures=(300.0, 1000.0, 1500.0),
     pressure=0.0,
 ) -> pd.DataFrame:
-    """Compare polynomial and BM3 results without repeatedly reading HDF5 files.
-
-    Each Quantas result is loaded once.  The previous implementation reopened
-    each file for every temperature/property combination, which was needlessly
-    slow for fine QHA grids.
-    """
+    """Compare polynomial and BM3 results while reading each HDF5 only once."""
     rows = []
 
     datasets = [
@@ -511,17 +505,18 @@ def method_comparison(
         ("BM3 EOS", _qha_grid_arrays(eos_path)),
     ]
 
+    required = {
+        "volume": "V (A^3 primitive)",
+        "KT": "KT (GPa)",
+        "KS": "KS (GPa)",
+        "alpha": "alphaV (K^-1)",
+    }
+
     for method, arrays in datasets:
         t = arrays["temperature"]
         p = arrays["pressure"]
         j = nearest_index(p, pressure)
 
-        required = {
-            "volume": "V (A^3 primitive)",
-            "KT": "KT (GPa)",
-            "KS": "KS (GPa)",
-            "alpha": "alphaV (K^-1)",
-        }
         missing = [key for key in required if key not in arrays]
         if missing:
             raise AttributeError(
@@ -819,3 +814,211 @@ def plot_pt_map(
     ax.set_ylabel("Pressure (GPa)")
     fig.tight_layout()
     return fig, ax
+
+def compare_qha_models_table(
+    pbe_path: str | Path,
+    b3lyp_path: str | Path,
+    *,
+    temperatures=(300.0, 1000.0, 1500.0),
+    pressure: float = 0.0,
+) -> pd.DataFrame:
+    """Compact numerical comparison of two QHA electronic-structure models."""
+    rows = []
+    for model, path in [("PBE", pbe_path), ("B3LYP", b3lyp_path)]:
+        arrays = _qha_grid_arrays(path)
+        t = arrays["temperature"]
+        p = arrays["pressure"]
+        j = nearest_index(p, pressure)
+
+        for target in temperatures:
+            i = nearest_index(t, target)
+            rows.append(
+                {
+                    "model": model,
+                    "T (K)": float(t[i]),
+                    "P (GPa)": float(p[j]),
+                    "V conventional (A^3)": float(arrays["volume"][i, j]) * 4.0,
+                    "alphaV (K^-1)": float(arrays["alpha"][i, j]),
+                    "KT (GPa)": float(arrays["KT"][i, j]),
+                    "KS (GPa)": float(arrays["KS"][i, j]),
+                }
+            )
+    return pd.DataFrame(rows)
+
+
+def plot_model_thermochemistry(
+    pbe_path: str | Path,
+    b3lyp_path: str | Path,
+    experimental: pd.DataFrame,
+    quantity: str,
+):
+    """Plot PBE and B3LYP QHA thermochemistry with black reference points."""
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots()
+
+    if quantity == "S":
+        pbe = entropy_curve(pbe_path)
+        b3 = entropy_curve(b3lyp_path)
+        xcol = "T (K)"
+        ycol = "S (J mol^-1 K^-1)"
+        excol = "S experimental/reference (J mol^-1 K^-1)"
+        ylabel = "Entropy (J mol⁻¹ K⁻¹)"
+    elif quantity == "Cp":
+        pbe = heat_capacity_curve(pbe_path, "Cp")
+        b3 = heat_capacity_curve(b3lyp_path, "Cp")
+        xcol = "T (K)"
+        ycol = "Cp (J mol^-1 K^-1)"
+        excol = "Cp experimental/reference (J mol^-1 K^-1)"
+        ylabel = "Heat capacity (J mol⁻¹ K⁻¹)"
+    elif quantity == "H":
+        pbe = enthalpy_increment_curve(pbe_path)
+        b3 = enthalpy_increment_curve(b3lyp_path)
+        xcol = "T (K)"
+        ycol = "H-Href (kJ mol^-1)"
+        excol = "H-H298.15 experimental/reference (kJ mol^-1)"
+        ylabel = "H(T) − H(298.15 K) (kJ mol⁻¹)"
+    else:
+        raise KeyError(quantity)
+
+    ax.plot(pbe[xcol], pbe[ycol], label=f"PBE {quantity}")
+    ax.plot(b3[xcol], b3[ycol], label=f"B3LYP {quantity}")
+    _black_experiment(
+        ax,
+        experimental["T (K)"],
+        experimental[excol],
+        "experiment/reference",
+    )
+    ax.set_xlabel("Temperature (K)")
+    ax.set_ylabel(ylabel)
+    ax.legend()
+    fig.tight_layout()
+    return fig, ax
+
+
+def plot_model_volume(
+    pbe_path: str | Path,
+    b3lyp_path: str | Path,
+    experimental: pd.DataFrame,
+    *,
+    pressure: float = 0.0,
+    normalized: bool = False,
+    reference_temperature: float = 300.0,
+):
+    """Compare absolute or normalized PBE/B3LYP volumes with experiment."""
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots()
+
+    for label, path in [("PBE", pbe_path), ("B3LYP", b3lyp_path)]:
+        table = qha_section(path, "volume", pressure=pressure)
+        volume = table["volume"].to_numpy(dtype=float) * 4.0
+        if normalized:
+            ref = float(
+                np.interp(
+                    reference_temperature,
+                    table["T (K)"].to_numpy(dtype=float),
+                    volume,
+                )
+            )
+            volume = volume / ref
+        ax.plot(table["T (K)"], volume, label=label)
+
+    ex = experimental.copy()
+    ex_volume = ex["conventional cell volume (A^3)"].to_numpy(dtype=float)
+    if normalized:
+        ex_ref = float(
+            np.interp(
+                reference_temperature,
+                ex["T (K)"].to_numpy(dtype=float),
+                ex_volume,
+            )
+        )
+        ex_volume = ex_volume / ex_ref
+
+    _black_experiment(
+        ax,
+        ex["T (K)"],
+        ex_volume,
+        "experiment",
+    )
+
+    ax.set_xlabel("Temperature (K)")
+    ax.set_ylabel("V / V(300 K)" if normalized else "Conventional cell volume (Å³)")
+    ax.legend()
+    fig.tight_layout()
+    return fig, ax
+
+
+def plot_model_alpha(
+    pbe_path: str | Path,
+    b3lyp_path: str | Path,
+    experimental: pd.DataFrame,
+    *,
+    pressure: float = 0.0,
+):
+    """Compare PBE/B3LYP volumetric thermal expansion with experiment."""
+    import matplotlib.pyplot as plt
+
+    fig, ax = plt.subplots()
+
+    for label, path in [("PBE", pbe_path), ("B3LYP", b3lyp_path)]:
+        table = qha_section(path, "alpha", pressure=pressure)
+        ax.plot(table["T (K)"], table["alpha"], label=label)
+
+    _black_experiment(
+        ax,
+        experimental["T (K)"],
+        experimental["volumetric alpha derived (K^-1)"],
+        "experiment",
+    )
+    ax.set_xlabel("Temperature (K)")
+    ax.set_ylabel("Volumetric thermal expansion (K⁻¹)")
+    ax.legend()
+    fig.tight_layout()
+    return fig, ax
+
+
+def plot_model_bulk_modulus(
+    pbe_path: str | Path,
+    b3lyp_path: str | Path,
+    experimental: pd.DataFrame,
+    component: str,
+    *,
+    pressure: float = 0.0,
+):
+    """Compare either KT or KS for PBE/B3LYP with the matched experiment."""
+    import matplotlib.pyplot as plt
+
+    component = component.upper()
+    if component == "KT":
+        key = "KT"
+        excol = "KT experimental (GPa)"
+        ylabel = "Isothermal bulk modulus, $K_T$ (GPa)"
+        exlabel = "experimental $K_T$"
+    elif component == "KS":
+        key = "KS"
+        excol = "KS from adiabatic Cij (GPa)"
+        ylabel = "Adiabatic bulk modulus, $K_S$ (GPa)"
+        exlabel = "experimental $K_S$"
+    else:
+        raise ValueError("component must be 'KT' or 'KS'")
+
+    fig, ax = plt.subplots()
+
+    for label, path in [("PBE", pbe_path), ("B3LYP", b3lyp_path)]:
+        table = qha_section(path, key, pressure=pressure)
+        ax.plot(table["T (K)"], table[key], label=f"{label} ${component[0]}_{component[1]}$")
+
+    _black_experiment(
+        ax,
+        experimental["T (K)"],
+        experimental[excol],
+        exlabel,
+    )
+    ax.set_xlabel("Temperature (K)")
+    ax.set_ylabel(ylabel)
+    ax.legend()
+    fig.tight_layout()
+    return fig, ax
+
